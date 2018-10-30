@@ -1,0 +1,117 @@
+﻿@model QuizApps.Models.quiz.createOption
+@{
+    ViewBag.Title = "ShowQuiz";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+       .class-AddItem {
+        border-color: blue;
+    }
+
+    .custom-goup {
+        margin-bottom: 65px;
+    }
+
+    .custom-body {
+        background-color: #eeeeee;
+    }
+
+    .custom-select-pane {
+        height: 170px;
+    }
+
+    .tooltip > .tooltip > .tooltip-inner {
+        background-color: #73AD21;
+        color: #FFFFFF;
+        border: 1px solid green;
+        padding: 15px;
+        font-size: 20px;
+    }
+</style>
+<body onload="GetTopicList();">
+    <section class="content-con">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-sm-48 col-md-30 col-xs-12">
+                    <div class="sidebar-block">
+                        <h4>Creating a New Quiz</h4>
+                        <div class="sidebar-content create-quiz">
+                            <div class="panel panel-default custom-body custom-select-pane">
+                                <div class="panel-body custom-goup">
+                                    <div class="col-md-6">
+                                        <label class="control-label">Select Category</label>
+
+                                        <div class="input-group">
+                                            <select class="selectpicker form-control" data-size="10" id="TopicList" title="Select Topic" onchange="GetSubList()">
+                                                <option>---select topic---</option>
+                                                <option value="add">Add New Topic</option>
+                                            </select><span id="AddTopic" class="input-group-addon"><a style="cursor:POINTER" href="javascript:void(0);" onclick="PauseSubList()" data-toggle="tooltip1" title="Add Topic"><i class="fa fa-plus" aria-hidden="true"></i></a></span>
+                                        </div>
+
+
+                                    </div>
+                                    <!-- form group ends here -->
+
+                                    <div class="col-md-6">
+                                        <label class="control-label">Select Sub Category</label>
+                                        @Html.HiddenFor(a => a.SubId)
+                                        <div class="input-group">
+
+                                            <select id="subList" class="form-control selectpicker" title="Select SubTopic" data-size="10" onchange="GetQuestionList(this)">
+                                                <option>---Select SubTopic---</option>
+                                            </select><span id="AddSubTopic" class="input-group-addon" data-toggle="tooltip" title="Add Sub Topic"><a href="#" data-toggle="popover" data-container="body" data-trigger="focus" data-placement="top" data-content="Select Topic First !"><i class="fa fa-plus" aria-hidden="true"></i></a></span>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @*<div class="custom-goup"></div>
+                                <hr style="width: 100%; color: gray; height: 1px; background-color:lightgray;" />
+                                <br />*@
+                            <div class="panel panel-default custom-body">
+                                <div class="panel-body">
+                                    <p id="remove" class="text-center"></p>
+                                    <!-- form group ends here -->
+                                    @*<a href="javascript:void(0);" onclick="AddElement()">Add</a>*@
+
+
+
+                                    <table id="gridDemo" class=" display form-group" cellspacing="0" width="100%"></table>
+                                    <div id='Paging' style="text-align: center">
+                                        <span id="loader" style="display:none;"> <i id="Quesloader" class="fa fa-spinner fa-spin fa-3x fa-fw"></i></span>
+                                    </div>
+                                    <!-- form group ends here -->
+                                    <br />
+                                    <div id="btnhd" class="custom-goup col-xs-12 text-center">
+                                        @*<button type="button" class="btn btn-primary" onclick="start();">Add <i class="fa fa-plus" aria-hidden="true"></i></button>
+                                            <input type="button" value="Add Bulk" class="btn btn-primary" onclick="href='javascript:;'" data-toggle="modal" data-target="#UploadXl">*@
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @*<div class="col-sm-4 col-md-3 col-xs-12 ">
+
+                    </div>*@
+            </div>
+        </div>
+    </section>
+
+    @*Update Quiz*@
+
+    @Html.Partial("~/Views/FileUpload/UploadExcel.cshtml", Model)
+
+    @Html.Partial("~/Views/Home/CreateQuiz.cshtml", Model)
+
+    @Html.Partial("~/Views/Home/Edit.cshtml")
+
+    @Html.Partial("~/Views/Home/AddTopic.cshtml")
+
+    @Html.Partial("~/Views/Home/AddSub.cshtml")
+
+</body>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/js/showArea.js"></script>

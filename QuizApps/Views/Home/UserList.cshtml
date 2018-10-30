@@ -1,0 +1,102 @@
+﻿@model QuizApps.Models.Score.GetScore
+@{
+    ViewBag.Title = "UserList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+    .custom-body {
+        background-color: #eeeeee;
+    }
+</style>
+<body>
+    <section class="content-con">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-sm-48 col-md-30 col-xs-12">
+                    <div class="sidebar-block">
+                        <h4>User List</h4>
+                        <div class="sidebar-content create-quiz">
+
+                            <div class="panel panel-default custom-body">
+                                <div class="panel-body custom-goup">
+                                    <span id="loader" style="display:none;"> <i id="loaders" class="fa fa-spinner fa-spin fa-3x fa-fw"></i></span>
+                                    <table id="userList" class=" display form-group" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th style="text-align: -webkit-center;">S.No</th>
+                                                <th style="text-align: -webkit-center;" data-sortable="false">Date</th>
+                                                <th style="text-align: -webkit-center;" data-sortable="false">User Name</th>
+                                                <th style="text-align: -webkit-center;" data-sortable="false">Roll No.</th>
+                                                <th style="text-align: -webkit-center;" data-sortable="false">Branch</th>
+                                                <th style="text-align: -webkit-center;" data-sortable="false">Topic</th>
+                                                <th style="text-align: -webkit-center;" data-sortable="false">SubTopic</th>
+                                                <th style="text-align: -webkit-center;" data-sortable="true">Score</th>
+                                                <th style="text-align: -webkit-center;" data-sortable="false">Attempted</th>
+                                                <th style="text-align: -webkit-center;" data-sortable="false">Duration</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="UserFieldArea"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+        var count = 0;
+        debugger
+        $.ajax({
+            url: '/Home/UserArea',
+            datatype: 'json',
+            Type: "Get",
+            success: function (result) {
+                debugger
+                $('#UserFieldArea').empty();
+
+                $.each(result, function (index, value) {
+                    var notdate = value.today;
+                    var nowDate = new Date(parseInt(notdate.substr(6)));
+                    //nowDate = nowDate.toString();
+
+                    //nowDate = nowDate.substring(0, 24);
+                    var da = nowDate.toLocaleDateString();
+                    var time = nowDate.toLocaleTimeString();
+
+                    var FullDate = da + " " + time;
+
+                    count = count + 1;
+                    //var newdate = nowDate.format("ddd mmm dd yyyy HH:MM:ss");
+                    //console.log(newdate);
+                    $('#UserFieldArea').append('<tr><td style="text-align: -webkit-center;">' + count + '</td><td style="text-align: -webkit-center;">' + FullDate + '</td><td style="text-align: -webkit-center;">' + value.user + '</td><td style="text-align: -webkit-center;">' + value.RollNo + '</td><td style="text-align: -webkit-center;">' + value.Branch + '</td><td style="text-align: -webkit-center;">' + value.topicname + '</td><td style="text-align: -webkit-center;">' + value.subname + '</td><td style="text-align: -webkit-center;">' + value.score + '</td><td style="text-align: -webkit-center;">' + value.Attempted + '</td><td style="text-align: -webkit-center;">' + value.totalTime + '</td></tr>');
+                })
+                $('#userList').DataTable({
+                    dom: 'Bfrtip',
+                    buttons: [
+                         {
+                             extend: 'excelHtml5',
+                             text : 'Download Result',
+                             title: 'Score List'
+                         }
+                    ],
+                    destroy: true, paging: true, "aLengthMenu": [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100]],
+                    "iDisplayLength": 10,
+                });
+               
+
+            }
+
+        });
+
+    })
+</script>

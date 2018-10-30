@@ -1,0 +1,194 @@
+﻿@model QuizApps.Models.quiz.createOption
+
+<div id="QuestionAdd" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="width:450px; display:table; margin-top:30px;">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Question</h4>
+            </div>
+            <div class="modal-body">
+                @using (Ajax.BeginForm("CreateQuiz", "Home", null, new AjaxOptions
+                {
+
+                    HttpMethod = "POST",
+                    InsertionMode = InsertionMode.Replace,
+                        OnSuccess = "SuccessMessageCreate",
+                    OnFailure = "FailMessage",
+                }, new { id = "form1", enctype = "multipart/form-data" }))
+                {
+                    @Html.HiddenFor(m => m.SubId, new { @id = "subTestId" })
+                 
+                
+                <!-- Alert Label-->
+                    <div id="qAdded" class="alertMessage alert alert-success alert-dismissable" style="display:none;">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">x</a>
+                        <strong>Success!</strong> Question is Added.
+                    </div>
+                    <div id="qWrong" class="alertMessage alert alert-danger alert-dismissable" style="display:none;">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">x</a>
+                        <strong>Failed!</strong> Question is not Valid.
+                    </div>
+                <!-- Text input-->
+                    <div class="form-group">
+
+                        <label class="control-label">Question</label>
+                        <div class="inputGroupContainer">
+                            @*@Html.TextArea("txtQuestion", new { @class = "form-control", id = "opQuestion1" })*@
+                            <textarea id="txtQuestion" class="form-control" onchange="SearchText(this)"></textarea>
+                            @Html.HiddenFor(m => m.question.Question, new { id = "opQuestion1" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.question.Question, "", new { @style = "font-family: inherit;color:#ff6666;" })
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label">Option A</label>
+                        @Html.TextBoxFor(m => m.optionOne, new { @class = "form-control", id = "opOne1" })
+                        @Html.ValidationMessageFor(m => m.optionOne, "", new { @style = "font-family: inherit;color:#ff6666;" })
+                    </div>
+
+                                <!-- form group ends here -->
+                    <div class="form-group col-md-6">
+                        <label class="control-label">Option B</label>
+                        @Html.TextBoxFor(m => m.optionTwo, new { @class = "form-control", @id = "opTwo1" })
+                        @Html.ValidationMessageFor(m => m.optionTwo, "", new { @style = "font-family: inherit;color:#ff6666;" })
+                    </div>
+
+                                <!-- form group ends here -->
+                    <div class="form-group col-md-6">
+                        <label class="control-label">Option C</label>
+                        @Html.TextBoxFor(m => m.optionThree, new { @class = "form-control", @id = "opThree1" })
+                        @Html.ValidationMessageFor(m => m.optionThree, "", new { @style = "font-family: inherit;color:#ff6666;" })
+                    </div>
+
+                                <!-- form group ends here -->
+                    <div class="form-group col-md-6">
+                        <label class="control-label">Option D</label>
+                        @Html.TextBoxFor(m => m.optionFour, new { @class = "form-control", id = "opFour1" })
+                        @Html.ValidationMessageFor(m => m.optionFour, "", new { @style = "font-family: inherit;color:#ff6666;" })
+                    </div>
+
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label">Correct Option</label>
+                        @Html.HiddenFor(m => m.question.optionCorrect, new { id = "opCorrect1" })
+                        <select id="opselect1" class="form-control selectpicker" data-size="10">
+                            <option value="1">A</option>
+                            <option value="2">B</option>
+                            <option value="3">C</option>
+                            <option value="4">D</option>
+                        </select>
+                        @Html.ValidationMessageFor(m => m.question.optionCorrect, "", new { @style = "font-family: inherit;color:#ff6666;" })
+                    </div>
+
+                    <div>
+                        <button id="SB1Form" type="submit" class="btn btn-primary" style="float: left;position: relative;left: 38%;">Submit<i class="fa fa-paper-plane" aria-hidden="true" onclick="PostCorrectAnswer()"></i></button>
+
+                    </div>
+                    @Html.HiddenFor(m => m.question.optionCorrect, new { id = "opCorrect1" })
+                }
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+
+   
+    function SuccessMessageCreate(data) {
+        debugger;
+        if (data.result == 1) {
+            FailMessage();
+        }
+        else {
+
+            var SubId = $("#subList").val();
+            debugger
+            $("#qAdded").show();
+            $("#qAdded").fadeTo(1500, 500).slideUp(500, function () {
+                $("#qAdded").hide();
+            });
+            $("#opOne1").val("");
+            $("#opTwo1").val("");
+            $("#opThree1").val("");
+            $("#opFour1").val("");
+            $("#opCorrect1").val("");
+            $("#opQuestion1").val("");
+            $("#txtQuestion").val("");
+            $("#opselect1").val('').trigger('change');
+            GetQuestionList(SubId);
+            //$('#QuestionAdd').modal('hide');
+        }
+    }
+    document.getElementById("SB1Form").onclick = function () {
+        PostCorrectAnswer();
+    };
+
+    function PostCorrectAnswer() {
+        debugger;
+        var e = document.getElementById("opselect1");
+        var value = e.options[e.selectedIndex].value;
+        console.log(value);
+        GetCorrectOption1(value);
+    }
+    function FailMessage() {
+        debugger;
+        $("#qWrong").show();
+        $("#qWrong").fadeTo(1500, 500).slideUp(500, function () {
+            $("#qWrong").hide();
+        });
+        $("#txtQuestion").val("");
+        $("#opOne1").val("");
+        $("#opTwo1").val("");
+        $("#opThree1").val("");
+        $("#opFour1").val("");
+        $("#opCorrect1").val("");
+        $("#opQuestion1").val("");
+        $("#opselect1")[0].selectedIndex = 0;
+
+    }
+    function GetCorrectOption1(item) {
+        debugger
+        switch (item) {
+            default:
+
+                break;
+            case "1":
+                var change = $("#opOne1").val();
+                $("#opCorrect1").val(change);
+                break;
+            case "2":
+                var change = $("#opTwo1").val();
+                $("#opCorrect1").val(change);
+                break;
+            case "3":
+                var change = $("#opThree1").val();
+                $("#opCorrect1").val(change);
+                break;
+            case "4":
+                var change = $("#opFour1").val();
+                $("#opCorrect1").val(change);
+
+        }
+    }
+    function SearchText(Question)
+    {
+        //debugger
+        var Ques = $('#txtQuestion').val();
+        //alert(Ques);
+        var replaceChar = Ques.replace('<', '&lt').replace('>', '&gt');
+        $('#opQuestion1').val(replaceChar);
+       // alert( $('#opQuestion1').val());
+    }
+
+</script>
+
+
+
+
+
+
+
+

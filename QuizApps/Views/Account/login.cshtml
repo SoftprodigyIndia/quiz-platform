@@ -1,0 +1,118 @@
+﻿@model QuizApps.Models.Login
+
+<div id="login" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Login</h4>
+            </div>
+            <div class="modal-body">
+                @*<form>*@
+                @*@using (Html.BeginForm("login", "Account", FormMethod.Post))*@
+                @using (Ajax.BeginForm("login", "Account", null, new AjaxOptions
+                    {
+                        HttpMethod = "POST",
+                        OnSuccess = "EmailPassword",
+                        OnBegin = "clearFun",
+                        OnFailure = "",
+                    }, new { id = "form4" }))
+                {
+                    <div id="validation" style="color:#ff6666"></div>
+                    <span id="loader" style="display:none;"> <i id="loaders" class="fa fa-spinner fa-spin fa-3x fa-fw"></i></span>
+                    <br />
+                    <!-- Text input-->
+                    <div class="form-group">
+                        @Html.LabelFor(u => u.EmailId, new { @class = "control-label" })<span style="color:red;">*</span>
+                        @*<label class=" control-label">E-Mail</label>*@
+                        <div class="inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                                @Html.EditorFor(u => u.EmailId, new { htmlAttributes = new { @id = "Username", @class = "form-control", @placeholder = "E-Mail Address" } })
+                                @*<input name="email" placeholder="E-Mail Address" class="form-control" type="text">*@
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(u => u.EmailId, "", new { @style = "font-family: inherit;color:#ff6666;" })
+                    </div>
+                    <!-- Text input-->
+                    <div class="form-group">
+                        @Html.LabelFor(u => u.Password, new { @class = "control-label" })<span style="color:red;">*</span>
+                        @*<label class="control-label">Password</label>*@
+                        <div class=" inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                                @Html.EditorFor(u => u.Password, new { htmlAttributes = new { @id = "Password", @class = "form-control", @placeholder = "Password" } })
+                                @*<input name="password" placeholder="Password" class="form-control" type="password">*@
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(u => u.Password, "", new { @style = "font-family: inherit;color:#ff6666;" })
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label"></label>
+                        <button type="submit" class="btn btn-primary">Submit <i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+
+                    </div>
+                }
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+
+    function EmailPassword(context) {
+        debugger
+        if (!context) {
+            $('#loader').hide();
+            $('#validation').empty();
+            $('#validation').append("Invalid EmailId or Password!");
+        }
+        else {
+            location.href = "/Home";
+        }
+    }
+    //function ValidUser() {
+    //        debugger
+    //        var username = $("#Username").val();
+    //        var Password = $("#Password").val();
+    //        $.ajax
+    //        ({
+    //            url: '/A/GetsubList',
+    //            type: 'get',
+    //            data: {
+    //                'user': username,
+    //                'pass': Password
+    //            }
+
+    //            ,
+    //            success: function (result) {
+
+    //                debugger
+    //                $("#subList").html("");
+    //                $("#subList").append('<option> ---Select SubTopic---  </option>');
+    //                $.each(result, function (index, value) {
+    //                    $("#subList").append('<option value="' + value.Value + '">' + value.Text + '</option>');
+    //                })
+    //            },
+    //            error: function (data) {
+    //                debugger
+    //                alert("Something went wrong..")
+    //            },
+    //        });
+    //}
+    function clearFun() {
+        debugger
+        $('#loader').show();
+        $('#validation').append("");
+        $('#Username').val("");
+        $('#Password').val("");
+    }
+</script>
+@*@if (null != TempData["alertMessage"])
+    {
+        <script>
+            alert("@TempData["alertMessage"]");
+        </script>
+    }*@

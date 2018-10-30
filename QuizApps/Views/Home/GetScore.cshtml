@@ -1,0 +1,28 @@
+﻿@model QuizApps.Models.Score.GetScore
+<div id="QuizQ" class="sidebar-block">
+    <h4>Message</h4>
+    <div class="sidebar-content create-quiz custom-create">
+
+        <div class="quizContainer">
+            <i class="nextButton fa fa-check-circle fa-5x" style="color:#00FF00" aria-hidden="true"></i>
+            <label class=" control-label">Quiz has been Successfully Submitted.</label>
+
+
+        </div>
+
+        <div class="form-group col-xs-12">
+            <br />
+            <br />
+            <div class="question">Go to<button type="button" class="btn-link" onclick="location.href='@Url.Action("TakeQuiz","Home")'"> Home </button></div>
+        </div>
+        @*<div class="form-group col-xs-12">
+
+                @Html.ActionLink("Start Quiz", "StartQuiz", "Home", new { @class = "center btn btn-primary" } )
+
+                <button type="button" class="control-group center-block btn btn-primary" onclick="location.href='/Home/StartQuiz'">Start Quiz <i class="fa fa-play" aria-hidden="true"></i></button>
+            </div>*@
+
+
+    </div>
+</div>
+

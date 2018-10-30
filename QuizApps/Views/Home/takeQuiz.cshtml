@@ -1,0 +1,94 @@
+﻿@model QuizApps.Models.quiz.takeQuiz
+
+@{
+    ViewBag.Title = "takeQuiz";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+    #hover-style {
+        overflow: hidden;
+        min-height: 550px;
+        max-height: 550px;
+    }
+
+    .panel-body {
+        overflow: hidden;
+        min-height: 120px;
+        max-height: 120px;
+        word-spacing: 2px;
+    }
+    
+        .panel-body:hover, #hover-style:hover {
+            overflow-y: scroll;
+        }
+</style>
+<html>
+
+<body onload="Listing.GetTopicList();">
+    <section class="content-con">
+        <div class="container">
+            <div class="row">
+                <div id="instruct" class="col-sm-14 col-md-36 col-xs-12">
+                    <div id="instructions" class="sidebar-block">
+                        <h4>Select Quiz</h4>
+                        <div class="sidebar-content create-quiz" >
+                            <div id=" hover-style">
+                                <form>
+                                    <div id="SelectTopic">
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @*<div class="col-sm-4 col-md-3 col-xs-12 ">
+                    <div class="sidebar-block">
+                        <h4>Quiz Topic Ideas</h4>
+                        <div class="sidebar-content">
+                            <ul>
+                                <li>Which political party do you fit into?</li>
+                                <li>How much of a computer guru are you?</li>
+                                <li>What decade do you belong to?</li>
+                                <li>Which dictator are you?</li>
+                                <li>Which deadly sin are you?</li>
+                                <li>Test your movie trivia knowledge</li>
+                                <li>How much of an indie music geek are you?</li>
+                                <li>Discover your personality type</li>
+                                <li>How romantic are you?</li>
+                                <li>Which Johhny Depp movie would you exist in?</li>
+                                <li>Are you a bridezilla?</li>
+                                <li>Which magical power best suits you?</li>
+                                <li>How Texas are you?</li>
+                                <li>What kind of traveller are you?</li>
+                                <li>How well do you know poker?</li>
+                                <li>How crazy are you?</li>
+                                <li>How smart are you with money?</li>
+                                <li>What will you die from? </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>*@
+            </div>
+        </div>
+    </section>
+    <script>
+        $('.panel-collapse').on('show.bs.collapse', function () {
+            $(this).parent('.panel').find('.fa-minus').show();
+            $(this).parent('.panel').find('.fa-plus').hide();
+        })
+        $('.panel-collapse').on('hide.bs.collapse', function () {
+            $(this).parent('.panel').find('.fa-minus').hide();
+            $(this).parent('.panel').find('.fa-plus').show();
+        })
+    </script>
+    <script src="~/CustomScripts/TakeQuiz/TakeQuiz.js"></script>
+    @*@Html.Partial("~/Views/Home/Instruction.cshtml")*@
+    </body>
+</html>
+
+

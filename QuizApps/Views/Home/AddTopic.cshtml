@@ -1,0 +1,220 @@
+﻿@model QuizApps.Models.quiz.Topics
+
+<div id="TopicAdd" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="width: 450px; display: table; margin-top: 50px; ">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Topic</h4>
+            </div>
+            <div class="modal-body">
+                @using (Ajax.BeginForm("AddTopic", "Home", null, new AjaxOptions
+                    {
+                        HttpMethod = "POST",
+                        OnComplete = "Check",
+                        OnSuccess = "EditTopicList",
+                        OnFailure = "",
+                    }, new { id = "topAdd" }))
+                {
+                <!-- Text input-->
+                    @*<button id="add btn" type="button" class="btn btn-primary btn-sm" onclick="AddElement();">Add Topics <i class="fa fa-plus" aria-hidden="true"></i></button>
+                        <br />
+                        <br />*@
+                    <div id="AddTopicAlert" class="alertMessage alert alert-success alert-dismissable" style="display:none;">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">x</a>
+                        <strong>Success!</strong> Topic Added Successfully.
+                    </div>
+                    <div id="UpTopicAlert" class="alertMessage alert alert-success alert-dismissable" style="display:none;">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">x</a>
+                        <strong>Success!</strong> Topic Updated Successfully.
+                    </div>
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "contol-label" })
+                    <div class="form-group">
+                        <label class=" control-label">Topic Name</label>
+                        <div id="field-area">
+                            <div class="inputGroupContainer">
+
+                                <div class="input-group icon-addon">
+                                    @Html.TextBoxFor(m => m.TopicName, new { @id = "inptopName", @class = "form-control" })
+                                    <span id="cancelEdit"></span>
+                                    @*<span id="searchclear"><i class="fa fa-times" aria-hidden="true"></i></span>*@
+                                    @*<div id="inptopdiv"></div>*@
+                                    @*<input type="text" name="TopicName" id="inptopName" class="form-control"/>*@
+
+                                    <span id="AddEditTopic" class="input-group-addon"></span>
+                                    @*<a href="javascript:void(0);" style="word-spacing: 30px;" onclick="RemoveSubElement(th_0)"><span class="glyphicon-remove-sign"></span></a>*@
+                                </div>
+                                <div id="showVal">
+                                    @Html.ValidationMessageFor(m => m.TopicName, "", new { @style = "font-family: inherit;color:#ff6666;" })
+                                </div>
+                            </div>
+                            <br />
+
+                            @*<a style="cursor:POINTER" href="javascript:void(0);" onclick="GetTopicList()"><i class="fa fa-refresh" aria-hidden="true"></i></a>*@
+                            <table id="topTable" class=" display" cellspacing="0" width="100%"></table>
+                        </div>
+                    </div>
+                }
+                @*<div>
+                        <button type="submit" class="btn btn-primary btn-sm" id="SubmitVal">Submit<i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+
+                    </div>*@
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+
+    var count = 1;
+    var Question = 1;
+    function AddElement() {
+        debugger;
+        if (count <= 7) {
+
+            var object = document.createElement("div");
+            object.setAttribute('id', 'th_' + count);
+            object.innerHTML = '<div class="inputGroupContainer"><div class="input-group"><input type="text" id = "tb_' + count + '" class="form-control" name = "[' + count + '].TopicName"/> <span class="input-group-addon"><a style="cursor:POINTER" href="javascript:void(0);" onclick="RemoveElement(th_' + count + ')"><i class="fa fa-trash" aria-hidden="true"></i></a></span></div></div><br/>';
+            document.getElementById('field-area').appendChild(object);
+            count++;
+            Question++;
+        }
+        else {
+            document.getElementById("add btn").disabled = true;
+        }
+    }
+    function RemoveElement(child) {
+        debugger;
+        if (count == 0) {
+            $(child).val("");
+        }
+        if (0 < count) {
+            count--;
+            Question--;
+            //document.getElementById('th_' + count)
+            document.getElementById('field-area').removeChild(child);
+            if (count == 7) {
+                document.getElementById("add btn").disabled = false;
+
+            }
+        }
+    }
+
+    function Check() {
+        debugger
+        for (var i = 0; i < 7; i++) {
+            if ($('#tb_' + i + '').val == null) {
+                document.getElementById("SubmitVal").disabled = true;
+            }
+        }
+    }
+    function EditTopicList() {
+        debugger
+        //   var TopicName = $('#inptopName').val();
+        //   $.ajax
+        //({
+        //    url: '/Home/AddTopic',
+        //    type: 'post',
+        //    data: {
+        //        'TopicName': TopicName
+        //    },
+        //    success: function (result) {
+        //        alert("Added");
+        //        GetTopicList();
+        //    }
+        //});
+        GetTopicList();
+    }
+
+
+
+
+    function confirmDelTopic(item) {
+        debugger
+        if (confirm("Confirm Delete!") == true) {
+            DeleteTopicList(item);
+        }
+        else {
+
+        }
+    }
+    function DeleteTopicList(item) {
+        debugger
+        $.ajax
+        ({
+            url: '/Home/DeleteTopic',
+            type: 'post',
+            data: {
+                'TopicDelId': item
+            },
+            success: function (result) {
+                if (result == true) {
+                    alert("Deleted !");
+                    GetTopicList();
+                }
+
+            }
+        });
+    }
+    function EditTopic(item) {
+        debugger
+        $.ajax
+        ({
+            url: '/Home/EditTopic',
+            type: 'post',
+            data: {
+                'TopicEditId': item,
+            },
+            success: function (resultName) {
+                debugger
+                $('#showVal').hide();
+                //$('#inptopdiv').empty();
+                //$('#inptopdiv').append('<input type="text" name="TopicName" id="inptopName" class="form-control"/>');
+                //$('#cancelEdit').empty();
+                //$('#cancelEdit').append('<a style="cursor:POINTER" onclick="cancelEdit()"><i class="fa fa-times form-control-feedback form-control-clear" style="right:50px; color:red;" aria-hidden="true"></i></a>');
+                $('#AddEditTopic').empty();
+                $('#AddEditTopic').append('<button class="btn-link" type="button" data-toggle="tooltip" title="Cancel Edit" onclick="cancelEdit()"><i class="fa fa-times" style="color:red;" aria-hidden="true"></i></button><button class="btn-link" type="button" data-toggle="tooltip" title="Save" onclick="EditConfTopic(' + item + ')"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>');
+                $('#inptopName').val(resultName);
+             
+
+            }
+        })
+    }
+
+    function cancelEdit() {
+
+        $('#inptopName').val("");
+        $('#AddEditTopic').empty();
+        $('#AddEditTopic').append('<button class="btn-link" type="submit"><i class="fa fa-plus" aria-hidden="true"></i></button>');
+    }
+
+    function EditConfTopic(item) {
+        debugger
+        var TopicEditName = $('#inptopName').val();
+        $.ajax
+        ({
+            url: '/Home/EditConfTop',
+            type: 'post',
+            data: {
+                'TopicEditId': item,
+                'TopicName': TopicEditName
+            },
+            success: function (result) {
+                debugger
+                if (result == true) {
+                    $('#UpTopicAlert').show();
+                    $("#UpTopicAlert").fadeTo(1500, 500).slideUp(500, function () {
+                        $("#UpTopicAlert").hide();
+                    });
+
+                    GetTopicList();
+                }
+
+            }
+        })
+    }
+</script>

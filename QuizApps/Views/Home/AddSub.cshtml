@@ -1,0 +1,211 @@
+﻿@model QuizApps.Models.quiz.Topics
+
+<div id="SubAdd" class="modal fade" role="dialog" data-modal-iframe-scroll="true">
+    <div class="modal-dialog" style=" width:450px; display:table; margin-top:50px;">
+
+        <!-- Modal content-->
+        <div class=" modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Add SubTopic</h4>
+        </div>
+        <div class="modal-body">
+            @using (Ajax.BeginForm("AddSub", "Home", null, new AjaxOptions
+                {
+                    HttpMethod = "POST",
+                    //OnComplete = "Check",
+                    OnSuccess = "EditSubList",
+                    OnFailure = "",
+                }, new { id = "form2" }))
+            {
+                <div id="AddSubAlert" class="alertMessage alert alert-success alert-dismissable" style="display:none;">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">x</a>
+                    <strong>Success!</strong> Topic Added Successfully.
+                </div>
+                <div id="UpSubAlert" class="alertMessage alert alert-success alert-dismissable" style="display:none;">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">x</a>
+                    <strong>Success!</strong> Topic Updated Successfully.
+                </div>
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "contol-label" })
+            <!-- Text input-->
+            <div class="form-group">
+                @* @Html.HiddenFor(a => a.TopId)*@
+                @*<input type="hidden" name="TopId" value="" id="hdnTopicID" />*@
+                <label style="text-emphasis-color:red" class=" control-label">Topic Name <i class="fa fa-arrow-right" aria-hidden="true"></i> <span id="TopicText"></span></label>
+                <br />
+                <br />
+                <label class=" control-label">SubTopic Name</label>
+                <div id="fieldSub-area">
+                    <div class="inputGroupContainer">
+                        @Html.HiddenFor(m => m.TopId, new { id = "IdTopic" })
+                        <div class="input-group">
+                            @Html.TextBoxFor(m => m.SubTopicName, new { @id = "inpsubName", @class = "form-control" })
+                            @*<input type="text" name="SubTopicName" id="inpsubName" class="form-control" />*@
+                            <span id="AddEdit" class="input-group-addon"></span>
+                            @*<a href="javascript:void(0);" style="word-spacing: 30px;" onclick="RemoveSubElement(th_0)"><span class="glyphicon-remove-sign"></span></a>*@
+                        </div>
+                        <div id="showSubVal">
+                            @Html.ValidationMessageFor(m => m.SubTopicName, "", new { @style = "font-family: inherit;color:#ff6666;" })
+                        </div>
+                    </div>
+                    <br />
+                    <table id="subTable" class=" display" cellspacing="0" width="100%"></table>
+                </div>
+            </div>
+
+            @*<div>
+                    <button type="submit" class="btn btn-primary btn-sm" id="SubmitVal">Submit<i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+
+                </div>*@
+            }
+        </div>
+    </div>
+
+    </div>
+</div>
+<script>
+    
+    var countSub = 1;
+    var QuestionSub = 1;
+    function AddSubElement() {
+        debugger;
+       
+        if (countSub <= 7) {
+
+            var object = document.createElement("div");
+            object.setAttribute('id', 'ts_' + countSub);
+            object.innerHTML = '<div class="inputGroupContainer"><div class="input-group"><input type="text" id = "tsb_' + countSub + '" class="form-control" name = "[' + countSub + '].SubTopicName"/> <span class="input-group-addon"><a style="cursor:POINTER" href="javascript:void(0);" onclick="RemoveSubElement(ts_' + countSub + ')"><i class="fa fa-trash" aria-hidden="true"></i></a></span></div></div><br/>';
+            document.getElementById('fieldSub-area').appendChild(object);
+            countSub++;
+            QuestionSub++;
+        }
+        else {
+            document.getElementById("add subbtn").disabled = true;
+        }
+    }
+    function RemoveSubElement(child) {
+        debugger;
+        if (countSub == 0) {
+            $(child).val("");
+        }
+        if (0 < countSub) {
+            countSub--;
+            QuestionSub--;
+            //document.getElementById('th_' + count)
+            document.getElementById('fieldSub-area').removeChild(child);
+            if (countSub == 7) {
+                document.getElementById("add subbtn").disabled = false;
+
+            }
+        }
+    }
+
+    //function Check() {
+    //    debugger
+    //    for (var i = 0; i < 7; i++) {
+    //        if ($('#tsb_' + i + '').val == null) {
+    //            document.getElementById("SubmitVal").disabled = true;
+    //        }
+    //    }
+    //}
+
+
+    //var TopicId = $('#hdnTopicID').val();
+    //var SubName = $('#inpsubName').val();
+
+    function EditSubList() {
+        debugger
+     //   var TopicId = $('#TopicList').val();
+     //   var SubName = $('#inpsubName').val();
+     //   $.ajax
+     //({
+     //    url: '/Home/AddSub',
+     //    type: 'post',
+     //    data: { 'TopicId': TopicId,
+     //        'SubName': SubName
+     //    },
+     //    success: function (result) {
+     //        debugger
+     //        alert("Added");
+             GetSubList();
+    //     }
+    //});
+    }
+
+    function confirmDelSub(item) {
+        debugger
+        if (confirm("Confirm Delete!") == true) {
+            DeleteSubList(item);
+        }
+        else {
+            GetSubList();
+        }
+    }
+    function DeleteSubList(item) {
+        debugger
+        $.ajax
+        ({
+            url: '/Home/DeleteSub',
+            type: 'post',
+            data: {
+                'SubDelId': item
+            },
+            success: function (result) {
+                if (result == true) {
+                    alert("Deleted !");
+                    GetSubList();
+                }
+
+            }
+        });
+    }
+    function EditSubTopic(item){
+        debugger
+        $.ajax
+        ({
+            url: '/Home/EditSub',
+            type: 'post',
+            data: {
+                'SubEditId': item,
+            },
+            success: function (resultName) {
+                debugger
+                $('#showSubVal').hide();
+                $('#AddEdit').empty();
+                $('#AddEdit').append('<button class="btn-link" type="button" style="color:red;" data-toggle="tooltip" title="Cancel" onclick="cancelEditSub()"><i class="fa fa-times" aria-hidden="true"></i></button><button class="btn-link" type="button" onclick="EditConfSubTopic(' + item + ')"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>');
+                $('#inpsubName').val(resultName);
+            }
+         })
+    }
+
+    function cancelEditSub() {
+
+        $('#inpsubName').val("");
+        $('#AddEdit').empty();
+        $('#AddEdit').append('<button class="btn-link" type="submit"><i class="fa fa-plus" aria-hidden="true"></i></button>');
+    }
+    function EditConfSubTopic(item) {
+        debugger
+        var SubEditName = $('#inpsubName').val();
+        $.ajax
+        ({
+            url: '/Home/EditConfSub',
+            type: 'post',
+            data: {
+                'SubEditId': item,
+                'SubName': SubEditName
+            },
+            success: function (result) {
+                debugger
+                if (result == true) {
+                    alert("SubTopic Edited!");
+                    GetSubList();
+                }
+                
+            }
+        })
+    }
+</script>
+
+

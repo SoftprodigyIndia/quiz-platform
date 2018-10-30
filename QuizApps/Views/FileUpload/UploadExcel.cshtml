@@ -1,0 +1,87 @@
+﻿@model QuizApps.Models.quiz.createOption
+
+<div id="UploadXl" class="modal fade" role="dialog" data-modal-iframe-scroll="true">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">File Upload</h4>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("UploadExcel", "FileUpload", FormMethod.Post, new { @class = "form1", enctype = "multipart/form-data" }))
+                {
+                    <div id="FileAlert" class="alertMessage alert alert-success alert-dismissable" style="display:none;">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">x</a>
+                        <strong>Success!</strong> File Uploaded Successfully.
+                    </div>
+                <!-- Text input-->
+                    <div class="form-group">
+
+                        <label class=" control-label">Download an Excel Format</label>
+                        <div class="inputGroupContainer">
+                            <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("DownloadExcel","Home")'">Download <i class="fa fa-download" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                <!-- Text input-->
+                    <div class="form-group">
+                        <label class="control-label">Uplaod an Excel File</label>
+                        <div class=" inputGroupContainer">
+                            <input type="file" id="FileUpload" name="files" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label"></label>
+
+                        <button type="button" class="btn btn-primary" onclick="submitForm();">Upload <i class="fa fa-upload" aria-hidden="true"></i></button>
+
+                    </div>
+                }
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<script>
+    function submitForm() {
+        debugger
+        var SubId = $("#subList").val();
+        var fileUpload = $("#FileUpload").get(0);
+        var files = fileUpload.files;
+        var fileData = new FormData();
+        fileData.append(files[0].name, files[0]);
+        fileData.append("SubId", SubId);
+        $.ajax
+            ({
+                url: '/FileUpload/UploadExcel',
+                type: 'POST',
+                data: fileData,
+                contentType: false,
+                processData: false,
+                async: true,
+                success: function (data) {
+                    debugger
+                    if (data == true) {
+                        GetQuestionList(SubId);
+                        $('#FileAlert').show();
+                        $("#FileAlert").fadeTo(1500, 500).slideUp(500, function () {
+                            $("#FileAlert").hide();
+                        });
+                      
+
+                        //alert("File Uploaded Successfully! ");
+                        $('#UploadXl').modal('hide');
+                    }
+                    else {
+                        alert("Something went wrong! ");
+                    }
+
+                    
+                }
+            });
+    }
+</script>

@@ -1,0 +1,119 @@
+﻿@model QuizApps.Models.SignUp
+
+<div id="signUp" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Sign Up</h4>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("Register","Account",FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "contol-label" })
+                @*<form>*@
+                    <!-- Text input-->
+                    <div class="form-group">
+                        @*<label class="control-label">First Name</label>*@
+                        @Html.LabelFor(u => u.Name, new { @class = "control-label" })<span style="color:red;">*</span>
+                        <div class="inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                @Html.EditorFor(u => u.Name, new { htmlAttributes = new { @class = "form-control", @placeholder="Name" } })
+                                @*<input name="Name" placeholder="Name" class="form-control" type="text">*@
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(u => u.Name, "", new { @style = "font-family: inherit;color:#ff6666;" })
+                    </div>
+                   
+                    
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class=" control-label">E-Mail</label><span style="color:red;">*</span>
+                        <div class="inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                                @Html.EditorFor(u => u.EmailId, new { htmlAttributes = new { @class = "form-control", @placeholder ="E-Mail Address"} })
+                                @*<input name="email" placeholder="E-Mail Address" class="form-control" type="text">*@
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(u => u.EmailId, "", new {  @style = "font-family: inherit;color:#ff6666;" })
+                    </div>
+                    <!-- Text input-->
+                    <div class="form-group">
+                        @*<label class=" control-label">Phone Number</label>
+                        <div class="inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-phone" aria-hidden="true"></i></span>
+                                <input name="phone" placeholder="Phone Number" class="form-control" type="text">
+                            </div>
+                        </div>*@
+                        <label class="control-label">Roll Number</label><span style="color:red;">*</span>
+                        <div class="inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                @*<input name="phone" placeholder="Roll Number" class="form-control" type="text">*@
+                                @Html.EditorFor(u=>u.Rollno,"", new { htmlAttributes = new { @class = "form-control", @placeholder = "Roll Number" } } ) 
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(u => u.Rollno, "", new { @style = "font-family: inherit;color:#ff6666;" })
+                    </div>
+                    <!-- Text input-->
+                    <div class="form-group">
+                        @*<label class="control-label">Phone Number</label>
+                            <div class="inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-phone" aria-hidden="true"></i></span>
+                                    <input name="phone" placeholder="Phone Number" class="form-control" type="text">
+                                </div>
+                            </div>*@
+                        <label class="control-label">Branch</label><span style="color:red;">*</span>
+                        <div class="inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                @*<input name="phone" placeholder="Roll Number" class="form-control" type="text">*@
+                                @Html.EditorFor(u => u.Branch, "", new { htmlAttributes = new { @class = "form-control", @placeholder = "Branch" } })
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(u => u.Branch, "", new { @style = "font-family: inherit;color:#ff6666;" })
+                    </div>
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="control-label">Password</label><span style="color:red;">*</span>
+                        <div class=" inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                                @Html.PasswordFor(u => u.Password, new { @class = "form-control", @placeholder="Password"} )
+                                @*<input name="password" placeholder="Password" class="form-control" type="password">*@
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(u => u.Password, "", new { @style = "font-family: inherit;color:#ff6666;" })
+                    </div>
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="control-label">Confirm Password</label><span style="color:red;">*</span>
+                        <div class=" inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                                @Html.PasswordFor(u => u.ConfirmPassword,new { @class="form-control",@placeholder="Confirm Password"} )
+                                @*<input name="confirm password" placeholder="Confirm Password" class="form-control" type="password">*@
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(u => u.ConfirmPassword, "", new { @style = "font-family: inherit;color:#ff6666;" })
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label"></label>
+                        <button type="submit" class="btn btn-primary">Submit <i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+
+                    </div>
+                }
+                @*</form>*@
+            </div>
+        </div>
+
+    </div>
+</div>
+

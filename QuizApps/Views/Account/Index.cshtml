@@ -1,0 +1,309 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="banner">
+    <img src="/images/banner-1.jpg" alt="banner">
+    <div class="banner-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h1>
+                        Take & Create <br>
+                        <span> Online Quizzes and Share Quizzes with Friends</span>
+                    </h1>
+                    <p></p>
+                    @if(Session["EmailId"] != null)
+                    {
+                           if(Session["RoleId"] != null)
+                           {
+
+                                @*<div class="btn-block"> @Html.ActionLink("Create Quiz", "ShowQuiz", "Home", new { @class = "btn btn-primary"})*@ @*<a href="javascript:;" class="btn btn-primary" data-toggle="modal" data-target="#CreateQuiz"> Create Quiz</a>*@ @*<a href="javascript:;" class="btn white-btn" data-toggle="modal" data-target="#takeQuiz">Take Quiz</a>*@ 
+                                  @*@Html.ActionLink("Take Quiz", "TakeQuiz", "Home", new { @class = "btn white-btn" })*@
+                                 @*</div>*@
+                            }
+                            else
+                            { 
+                                <div class="btn-block"> @Html.ActionLink("Take Quiz", "TakeQuiz", "Home", new { @class = "btn white-btn" }) @*<a href="javascript:;" class="btn btn-primary" data-toggle="modal" data-target="#takeQuiz">Take Quiz</a>*@ @*<a href="javascript:;" class="btn white-btn" data-toggle="modal" @*data-target="#login">Create Survey</a>*@ </div>
+                            }
+
+                    }
+                    else
+	                {
+
+                        <div class="btn-block"> <a href="javascript:;" class="btn white-btn" data-toggle="modal" data-target="#login">Take Quiz</a> @*<a href="javascript:;" class="btn white-btn" data-toggle="modal" data-target="#login">Create Survey</a>*@ </div>
+	                }
+                </div>
+                </div>
+            </div>
+        </div>
+</section>
+<!-- banner ends here -->
+<section id="about" class="about-us">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="heading">
+                    <h3>About Softprodigy</h3>
+                    <div class="g-hr"> <span class="g-hr-h"> <i class="fa fa-heart"></i> </span> </div>
+                </div>
+                <p>Founded in 2006, SoftProdigy is an award-winning organization with expertise in the areas of Web & Mobile Technologies and Consulting services. Over the last few years, the organization has made a reputation for building quality solutions for its clients that helped them get more out of their business. SoftProdigy's customers range from start-ups to Enterprises like: ING, Aviva, Vodafone and Bajaj. The company has worked with entrepreneurs as well as established corporate houses across the globe to put their ideas into inception and take it to the market. </p>
+                <p>It employs over 150 technology and management professionals who work closely with each other. With a consistent growth track record that has surpassed the industry trends year on year since the company's inception, what sets it apart is the philosophy of pursuing, quoted as "measured success".</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- about us ends here -->
+<section id="hiw" class="how-it-works">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="heading">
+                    <h3>How it Works</h3>
+                    <div class="g-hr"> <span class="g-hr-h"> <i class="fa fa-heart"></i> </span> </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <h4> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Create A Quiz</h4>
+                <ul>
+                    <li>Make tests, exams & quizzes</li>
+                    <li>Over 6 types of quiz questions</li>
+                    <li>Add videos, images & media</li>
+                    <li>Brand with your logo/colors</li>
+                    <li>Security options</li>
+                </ul>
+            </div>
+            <div class="col-sm-4">
+                <h4><i class="fa fa-share-alt" aria-hidden="true"></i> Share Your Quiz</h4>
+                <ul>
+                    <li>Share on Facebook/Twitter</li>
+                    <li>Embed on your website</li>
+                    <li>Post on blogs</li>
+                    <li>Link to your quiz</li>
+                    <li>Email / print quizzes</li>
+                </ul>
+            </div>
+            <div class="col-sm-4">
+                <h4><i class="fa fa-pie-chart" aria-hidden="true"></i> Analyze Results</h4>
+                <ul>
+                    <li> Quiz stats & reports</li>
+                    <li>Instant grading</li>
+                    <li>Download results</li>
+                    <li>Track quiz takers</li>
+                    <li>Issue certificates</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- how it works ends here -->
+<section id="faq" class="faq">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="heading">
+                    <h3>FAQ's</h3>
+                    <div class="g-hr"> <span class="g-hr-h"> <i class="fa fa-heart"></i> </span> </div>
+                </div>
+
+
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <i class="more-less glyphicon glyphicon-plus"></i>
+                                    CAN I PUBLISH TO FACEBOOK?
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body">
+                               This Feature is Coming  Soon.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingTwo">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    <i class="more-less glyphicon glyphicon-plus"></i>
+                                    IS THERE A LIMIT TO THE NUMBER OF QUESTIONS I CAN ADD?
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                            <div class="panel-body">
+                                There are no Limits of entering questions. You can add bulk Questions through excel.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingThree">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    <i class="more-less glyphicon glyphicon-plus"></i>
+                                    IS USER DETAILS ARE SECURED?
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                            <div class="panel-body">
+                                This Web Application is fully secured as it is developed in asp.net MVC platform.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingThree">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
+                                    <i class="more-less glyphicon glyphicon-plus"></i>
+                                    IS THIS WEB APPLICATION USEFULL?
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                            <div class="panel-body">
+                                It is mainly centralised to use among among authorised users.To enable the head and technical supporting group to access the system from anywhere.To enable the admin to view as well as add update questions from anywhere.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingThree">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseThree">
+                                    <i class="more-less glyphicon glyphicon-plus"></i>
+                                   WHAT ARE THE FUNCTIONAL REQUIREMENTS?
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                            <div class="panel-body">
+                                Admin need to provide topic and subtopic and its related questions.
+                                Questions must be at least 20 of a particular topic and subtopic in order       to display to user.
+                                User needs to register itself first to take the quiz.
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div><!-- panel-group -->
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- faq's ends here -->
+<!-- <section class="content-con">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-8 col-md-9 col-xs-12">
+        <div class="sidebar-block">
+          <h4>Creating a New Quiz Is Easy</h4>
+          <div class="sidebar-content"> </div>
+        </div>
+      </div>
+      <div class="col-sm-4 col-md-3 col-xs-12 ">
+        <div class="sidebar-block">
+          <h4>Quiz Topic Ideas</h4>
+          <div class="sidebar-content">
+            <ul>
+              <li>Which political party do you fit into?</li>
+              <li>How much of a computer guru are you?</li>
+              <li>What decade do you belong to?</li>
+              <li>Which dictator are you?</li>
+              <li>Which deadly sin are you?</li>
+              <li>Test your movie trivia knowledge</li>
+              <li>How much of an indie music geek are you?</li>
+              <li>Discover your personality type</li>
+              <li>How romantic are you?</li>
+              <li>Which Johhny Depp movie would you exist in?</li>
+              <li>Are you a bridezilla?</li>
+              <li>Which magical power best suits you?</li>
+              <li>How Texas are you?</li>
+              <li>What kind of traveller are you?</li>
+              <li>How well do you know poker?</li>
+              <li>How crazy are you?</li>
+              <li>How smart are you with money?</li>
+              <li>What will you die from? </li>
+            </ul>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</section> content con ends here -->
+
+<section id="contact" class="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+
+                <h3 class="text-center text-uppercase">Contact Us</h3>
+
+
+                <form class="form-horizontal" action=" " method="post" id="contact_form">
+                    <fieldset>
+
+
+
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">First Name</label>
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                    <input name="first_name" placeholder="First Name" class="form-control" type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">E-Mail</label>
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                                    <input name="email" placeholder="E-Mail Address" class="form-control" type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Phone</label>
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-phone" aria-hidden="true"></i></span>
+                                    <input name="phone" placeholder="(845)555-1212" class="form-control" type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Message</label>
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                                    <textarea class="form-control" name="comment" placeholder="Project Description"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Button -->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label"></label>
+                            <div class="col-md-4">
+                                <button type="submit" class="btn white-btn">Submit <i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</section>

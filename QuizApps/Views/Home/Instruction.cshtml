@@ -1,0 +1,48 @@
+﻿@*<div id="cha"class="col-sm-8 col-md-9 col-xs-12">*@
+<div id="instruction" class="sidebar-block">
+    <h4>Instruction</h4>
+    <div class="sidebar-content create-quiz hover-style" @*style="min-height:550px;max-height:550px;overflow-y: scroll;"*@>
+        <form>
+            <a class="control-group pull-right" style="cursor:POINTER" onclick="Listing.GetList();">Back...</a>
+            <div class="form-group col-md-6 ">
+            
+                <br />
+               
+                <label class="control-label">
+                    <i class="fa fa-hand-o-right fa-lg" aria-hidden="true"></i> Total number of questions : 20
+                </label>
+                <br />
+                <br />
+                <label class="control-label">
+                    <i class="fa fa-hand-o-right fa-lg" aria-hidden="true"></i> Time alloted : 20 minutes.
+                </label>
+                <br />
+                <br />
+                <label class="control-label">
+                    <i class="fa fa-hand-o-right fa-lg" aria-hidden="true"></i> Each question carry 1 mark, no negative marks.
+                </label>
+                <br />
+                <br />
+                <label class="control-label">
+                    <i class="fa fa-hand-o-right fa-lg" aria-hidden="true"></i> DO NOT Click on 'Back' or 'Refresh' button.
+                </label><br />
+                <br />
+                <label class="control-label">
+                    <i class="fa fa-hand-o-right fa-lg" aria-hidden="true"></i> All the best :-).
+                </label>
+
+            </div>
+            
+            <div class="form-group col-xs-12">
+                <br />
+                
+              
+                    @*@Html.ActionLink("Start Quiz", "StartQuiz", "Home", new { @class = "center btn btn-primary" } )*@
+                    
+                <button type="button" class="control-group center-block btn btn-primary" onclick="location.href='/Home/StartQuiz'">Start Quiz <i class="fa fa-play" aria-hidden="true"></i></button>
+                </div>
+        </form>
+
+    </div>
+</div>
+@*</div>*@

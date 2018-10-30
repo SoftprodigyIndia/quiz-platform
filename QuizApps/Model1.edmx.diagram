@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2c0f4cff2b7e40169303b52d76f797a2" Name="Diagram1" ZoomLevel="80">
+        <EntityTypeShape EntityType="mocktestModel.OptionDetail" Width="1.5" PointX="7.5" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="mocktestModel.QuesDetail" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="mocktestModel.Role" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="mocktestModel.ScoreDetail" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="mocktestModel.SubTopic" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="mocktestModel.Topic" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="mocktestModel.user" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <AssociationConnector Association="mocktestModel.FK_dbo_OptionDetails_dbo_QuesDetails_QuesDetailId" ManuallyRouted="false" />
+        <AssociationConnector Association="mocktestModel.FK_dbo_QuesDetails_dbo_SubTopics_SubTopicId" ManuallyRouted="false" />
+        <AssociationConnector Association="mocktestModel.FK_dbo_users_dbo_Roles_roleId" ManuallyRouted="false" />
+        <AssociationConnector Association="mocktestModel.FK_dbo_ScoreDetails_dbo_users_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="mocktestModel.FK_dbo_SubTopics_dbo_Topics_TopicId" ManuallyRouted="false" />
+        <AssociationConnector Association="mocktestModel.fk_Qid_score" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

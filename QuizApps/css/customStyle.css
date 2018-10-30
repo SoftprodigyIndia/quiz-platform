@@ -1,0 +1,145 @@
+﻿
+#instruct {
+    width: 100%;
+}
+
+body {
+    line-height: 2.428571;
+}
+
+.nextButton {
+    width: 150px;
+    display: table;
+    text-align: center;
+    position: relative;
+    margin: 20px auto 0;
+}
+.QuesNo{
+     border-radius: 3px;
+    font-size: 15px;
+    height: auto;
+    margin: 0 0 20px;
+    text-align: left;
+    width: 100%;
+    color: #777777;
+}
+
+.question {
+    border-radius: 3px;
+    font-size: 15px;
+    height: auto;
+    margin: 0 0 20px;
+    text-align: left;
+    width: 100%;
+    color: #777777;
+}
+
+.choiceList {
+    color: #777777;
+    margin: 0 0 20px;
+    text-align: left;
+}
+
+.quizMessage {
+    background-color: #eee;
+    border-radius: 6px;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    padding: 2px;
+    color: red;
+}
+
+.startagain {
+    width: 150px;
+    display: table;
+    text-align: center;
+    position: relative;
+    margin: 20px auto 0;
+}
+.sidebar-block {
+    min-height: 420px;
+}
+/*.custom-create {
+    height: 470px;
+}*/
+
+
+
+
+input.radio:empty {
+	margin-left: -999px;
+}
+
+/* style label */
+input.radio:empty ~ label {
+	position: relative;
+	line-height: 2.5em;
+	text-indent: 3.25em;
+	/*margin-top: 2em;*/
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+input.radio:empty ~ label:before {
+	position: absolute;
+	display: block;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	content: '';
+	width: 2.5em;
+	background: #D1D3D4;
+	border-radius: 3px 0 0 3px;
+}
+
+/* toggle hover */
+input.radio:hover:not(:checked) ~ label:before{
+	content:'\2714';
+	text-indent: .9em;
+	color: #C2C2C2;
+    border: 1px solid #9E9E9E
+}
+
+input.radio:hover:not(:checked) ~ label {
+	color: #888;
+}
+
+/* toggle on */
+input.radio:checked ~ label:before, .labstyle:before  {
+	content:'\2714';
+	text-indent: .9em;
+	color: #9CE2AE;
+	background-color: #4DCB6D;
+    border: 1px solid #D1D3D4;
+}
+
+input.radio:checked ~ label, .labstyle {
+	color: #777;
+      border: 1px solid #4DCB6D;
+}
+
+/* radio focus */
+input.radio:focus ~ label:before {
+	box-shadow: 0 0 0 3px #999;
+}
+
+.listyle {
+	clear: both;
+	margin: 0 50px;
+}
+
+.labstyle {
+  width: 1000px;
+  border-radius: 3px;
+  border:    1px solid #D1D3D4
+}
+.sidebar-block ul li{
+        border-bottom: none
+
+}
+
+ 

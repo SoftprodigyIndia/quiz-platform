@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="mocktestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="OptionDetail">
+    <Key>
+      <PropertyRef Name="OptionDetailsId" />
+    </Key>
+    <Property Name="OptionDetailsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="QuesDetailId" Type="Int32" Nullable="false" />
+    <Property Name="OpOne" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="OpTwo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="OpThree" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="OpFour" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="QuesDetail" Relationship="Self.FK_dbo_OptionDetails_dbo_QuesDetails_QuesDetailId" FromRole="OptionDetails" ToRole="QuesDetails" />
+  </EntityType>
+  <EntityType Name="QuesDetail">
+    <Key>
+      <PropertyRef Name="QuesDetailId" />
+    </Key>
+    <Property Name="QuesDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SubTopicId" Type="Int32" Nullable="false" />
+    <Property Name="Question" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="OpCorrect" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="OptionDetails" Relationship="Self.FK_dbo_OptionDetails_dbo_QuesDetails_QuesDetailId" FromRole="QuesDetails" ToRole="OptionDetails" />
+    <NavigationProperty Name="SubTopic" Relationship="Self.FK_dbo_QuesDetails_dbo_SubTopics_SubTopicId" FromRole="QuesDetails" ToRole="SubTopics" />
+    <NavigationProperty Name="ScoreDetails" Relationship="mocktestModel.fk_Qid_score" FromRole="QuesDetail" ToRole="ScoreDetail" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="users" Relationship="Self.FK_dbo_users_dbo_Roles_roleId" FromRole="Roles" ToRole="users" />
+  </EntityType>
+  <EntityType Name="ScoreDetail">
+    <Key>
+      <PropertyRef Name="ScoreDetailsId" />
+    </Key>
+    <Property Name="ScoreDetailsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="Attempted" Type="Int32" Nullable="false" />
+    <Property Name="Corrected" Type="Int32" Nullable="false" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Duration" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Score" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="user" Relationship="Self.FK_dbo_ScoreDetails_dbo_users_UserId" FromRole="ScoreDetails" ToRole="users" />
+    <Property Name="QuesDetailId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="QuesDetail" Relationship="mocktestModel.fk_Qid_score" FromRole="ScoreDetail" ToRole="QuesDetail" />
+  </EntityType>
+  <EntityType Name="SubTopic">
+    <Key>
+      <PropertyRef Name="SubTopicId" />
+    </Key>
+    <Property Name="SubTopicId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TopicId" Type="Int32" Nullable="false" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="QuesDetails" Relationship="Self.FK_dbo_QuesDetails_dbo_SubTopics_SubTopicId" FromRole="SubTopics" ToRole="QuesDetails" />
+    <NavigationProperty Name="Topic" Relationship="Self.FK_dbo_SubTopics_dbo_Topics_TopicId" FromRole="SubTopics" ToRole="Topics" />
+  </EntityType>
+  <EntityType Name="Topic">
+    <Key>
+      <PropertyRef Name="TopicId" />
+    </Key>
+    <Property Name="TopicId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="SubTopics" Relationship="Self.FK_dbo_SubTopics_dbo_Topics_TopicId" FromRole="Topics" ToRole="SubTopics" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EmailId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="roleId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Role" Relationship="Self.FK_dbo_users_dbo_Roles_roleId" FromRole="users" ToRole="Roles" />
+    <NavigationProperty Name="ScoreDetails" Relationship="Self.FK_dbo_ScoreDetails_dbo_users_UserId" FromRole="users" ToRole="ScoreDetails" />
+    <Property Name="RollNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Branch" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_dbo_OptionDetails_dbo_QuesDetails_QuesDetailId">
+    <End Role="QuesDetails" Type="Self.QuesDetail" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="OptionDetails" Type="Self.OptionDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QuesDetails">
+        <PropertyRef Name="QuesDetailId" />
+      </Principal>
+      <Dependent Role="OptionDetails">
+        <PropertyRef Name="QuesDetailId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_QuesDetails_dbo_SubTopics_SubTopicId">
+    <End Role="SubTopics" Type="Self.SubTopic" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="QuesDetails" Type="Self.QuesDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubTopics">
+        <PropertyRef Name="SubTopicId" />
+      </Principal>
+      <Dependent Role="QuesDetails">
+        <PropertyRef Name="SubTopicId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_users_dbo_Roles_roleId">
+    <End Role="Roles" Type="Self.Role" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="users" Type="Self.user" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="users">
+        <PropertyRef Name="roleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_ScoreDetails_dbo_users_UserId">
+    <End Role="users" Type="Self.user" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ScoreDetails" Type="Self.ScoreDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="ScoreDetails">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_SubTopics_dbo_Topics_TopicId">
+    <End Role="Topics" Type="Self.Topic" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SubTopics" Type="Self.SubTopic" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Topics">
+        <PropertyRef Name="TopicId" />
+      </Principal>
+      <Dependent Role="SubTopics">
+        <PropertyRef Name="TopicId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="mocktestEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="OptionDetails" EntityType="Self.OptionDetail" />
+    <EntitySet Name="QuesDetails" EntityType="Self.QuesDetail" />
+    <EntitySet Name="Roles" EntityType="Self.Role" />
+    <EntitySet Name="ScoreDetails" EntityType="Self.ScoreDetail" />
+    <EntitySet Name="SubTopics" EntityType="Self.SubTopic" />
+    <EntitySet Name="Topics" EntityType="Self.Topic" />
+    <EntitySet Name="users" EntityType="Self.user" />
+    <AssociationSet Name="FK_dbo_OptionDetails_dbo_QuesDetails_QuesDetailId" Association="Self.FK_dbo_OptionDetails_dbo_QuesDetails_QuesDetailId">
+      <End Role="QuesDetails" EntitySet="QuesDetails" />
+      <End Role="OptionDetails" EntitySet="OptionDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_QuesDetails_dbo_SubTopics_SubTopicId" Association="Self.FK_dbo_QuesDetails_dbo_SubTopics_SubTopicId">
+      <End Role="SubTopics" EntitySet="SubTopics" />
+      <End Role="QuesDetails" EntitySet="QuesDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_users_dbo_Roles_roleId" Association="Self.FK_dbo_users_dbo_Roles_roleId">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="users" EntitySet="users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_ScoreDetails_dbo_users_UserId" Association="Self.FK_dbo_ScoreDetails_dbo_users_UserId">
+      <End Role="users" EntitySet="users" />
+      <End Role="ScoreDetails" EntitySet="ScoreDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_SubTopics_dbo_Topics_TopicId" Association="Self.FK_dbo_SubTopics_dbo_Topics_TopicId">
+      <End Role="Topics" EntitySet="Topics" />
+      <End Role="SubTopics" EntitySet="SubTopics" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Qid_score" Association="mocktestModel.fk_Qid_score">
+      <End Role="QuesDetail" EntitySet="QuesDetails" />
+      <End Role="ScoreDetail" EntitySet="ScoreDetails" />
+    </AssociationSet>
+  </EntityContainer>
+  <Association Name="fk_Qid_score">
+    <End Type="mocktestModel.QuesDetail" Role="QuesDetail" Multiplicity="1" />
+    <End Type="mocktestModel.ScoreDetail" Role="ScoreDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QuesDetail">
+        <PropertyRef Name="QuesDetailId" />
+      </Principal>
+      <Dependent Role="ScoreDetail">
+        <PropertyRef Name="QuesDetailId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

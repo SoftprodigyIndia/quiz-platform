@@ -1,0 +1,247 @@
+﻿@model QuizApps.Models.quiz.ShowQuiz
+@{
+    ViewBag.Title = "StartQuiz";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<html>
+<body @*onload="Listing.GetTopicList();"*@>
+
+    <link rel="stylesheet" type="text/css" href="~/css/customStyle.css">
+    <style>
+        .col-md-1 {
+            width: 4.7%;
+            float: left;
+            -webkit-min-logical-width: 1%;
+        }
+    </style>
+    <section class="content-con">
+        <div class="container">
+            <div class="row">
+                <div id="instruct" class="col-sm-8 col-md-9 col-xs-12">
+                    <div id="QuizQ" class="sidebar-block">
+                        <div class="input-group-sm">
+                            <h4>
+                                <span>
+                                    Take Quiz @if (TempData["SubId"] != null)
+                                    {
+                                        TempData.Keep("SubId"); <span id="countdown" class="pull-right" style="color: #fff; margin:0.1em"></span> <i class="fa fa-clock-o fa-lg pull-right" style="color:#fff;margin:0.1em" aria-hidden="true"></i>}
+                                    else
+                                    {<span class="pull-right" style="color: #fff; margin:0.1em">00:00</span> <i class="fa fa-clock-o fa-lg pull-right" style="color:#fff;margin:0.1em" aria-hidden="true"></i>}
+                                </span>
+                            </h4>
+                        </div>
+                        <div class="sidebar-content create-quiz custom-create ">
+                            <div id=" hover-style">
+                                @if (TempData["SubId"] != null)
+                                {
+                                    TempData.Keep("SubId");
+                                    <div class="container">
+                                        <div class="row bs-wizard" style="border-bottom:0;">
+
+                                            <div id="q1" class="col-md-1 bs-wizard-step active">
+
+                                                <div class="text-center bs-wizard-stepnum">1</div>
+                                                <div class="progress"><div class="progress-bar"></div></div>
+                                                <a href="#" class="bs-wizard-dot"></a>
+                                                <div class="bs-wizard-info text-center"></div>
+                                            </div>
+
+                                            <div id="q2" class="col-md-1 bs-wizard-step disabled">
+                                                <!-- complete -->
+                                                <div class="text-center bs-wizard-stepnum">2</div>
+                                                <div class="progress"><div class="progress-bar"></div></div>
+                                                <a href="#" class="bs-wizard-dot"></a>
+                                                <div class="bs-wizard-info text-center"></div>
+                                            </div>
+
+                                            <div id="q3" class="col-md-1 bs-wizard-step disabled">
+                                                <!-- complete -->
+                                                <div class="text-center bs-wizard-stepnum">3</div>
+                                                <div class="progress"><div class="progress-bar"></div></div>
+                                                <a href="#" class="bs-wizard-dot"></a>
+                                                <div class="bs-wizard-info text-center"></div>
+                                            </div>
+
+                                            <div id="q4" class="col-md-1 bs-wizard-step disabled">
+                                                <!-- active -->
+                                                <div class="text-center bs-wizard-stepnum"> 4</div>
+                                                <div class="progress"><div class="progress-bar"></div></div>
+                                                <a href="#" class="bs-wizard-dot"></a>
+                                                <div class="bs-wizard-info text-center"></div>
+                                            </div>
+
+                                            <div id="q5" class="col-md-1 bs-wizard-step disabled">
+                                                <!-- active -->
+                                                <div class="text-center bs-wizard-stepnum"> 5</div>
+                                                <div class="progress"><div class="progress-bar"></div></div>
+                                                <a href="#" class="bs-wizard-dot"></a>
+                                                <div class="bs-wizard-info text-center"></div>
+                                            </div>
+
+                                            <div id="q6" class="col-md-1 bs-wizard-step disabled">
+                                                <!-- active -->
+                                                <div class="text-center bs-wizard-stepnum"> 6</div>
+                                                <div class="progress"><div class="progress-bar"></div></div>
+                                                <a href="#" class="bs-wizard-dot"></a>
+                                                <div class="bs-wizard-info text-center"></div>
+                                            </div>
+
+                                            <div id="q7" class="col-md-1 bs-wizard-step disabled">
+                                                <!-- active -->
+                                                <div class="text-center bs-wizard-stepnum"> 7</div>
+                                                <div class="progress"><div class="progress-bar"></div></div>
+                                                <a href="#" class="bs-wizard-dot"></a>
+                                                <div class="bs-wizard-info text-center"></div>
+                                            </div>
+
+                                            <div id="q8" class="col-md-1 bs-wizard-step disabled">
+                                                <!-- active -->
+                                                <div class="text-center bs-wizard-stepnum"> 8</div>
+                                                <div class="progress"><div class="progress-bar"></div></div>
+                                                <a href="#" class="bs-wizard-dot"></a>
+                                                <div class="bs-wizard-info text-center"></div>
+                                            </div>
+
+                                            <div id="q9" class="col-md-1 bs-wizard-step disabled">
+                                                <!-- active -->
+                                                <div class="text-center bs-wizard-stepnum"> 9</div>
+                                                <div class="progress"><div class="progress-bar"></div></div>
+                                                <a href="#" class="bs-wizard-dot"></a>
+                                                <div class="bs-wizard-info text-center"></div>
+                                            </div>
+
+                                            <div id="q10" class="col-md-1 bs-wizard-step disabled">
+                                                <!-- active -->
+                                                <div class="text-center bs-wizard-stepnum"> 10</div>
+                                                <div class="progress"><div class="progress-bar"></div></div>
+                                                <a href="#" class="bs-wizard-dot"></a>
+                                                <div class="bs-wizard-info text-center"></div>
+                                            </div>
+                                            <div id="q11" class="col-md-1 bs-wizard-step disabled">
+                                                <!-- active -->
+                                                <div class="text-center bs-wizard-stepnum"> 11</div>
+                                                <div class="progress"><div class="progress-bar"></div></div>
+                                                <a href="#" class="bs-wizard-dot"></a>
+                                                <div class="bs-wizard-info text-center"></div>
+                                            </div>
+                                            <div id="q12" class="col-md-1 bs-wizard-step disabled">
+                                                <!-- active -->
+                                                <div class="text-center bs-wizard-stepnum"> 12</div>
+                                                <div class="progress"><div class="progress-bar"></div></div>
+                                                <a href="#" class="bs-wizard-dot"></a>
+                                                <div class="bs-wizard-info text-center"></div>
+                                            </div>
+                                            <div id="q13" class="col-md-1 bs-wizard-step disabled">
+                                                <!-- active -->
+                                                <div class="text-center bs-wizard-stepnum"> 13</div>
+                                                <div class="progress"><div class="progress-bar"></div></div>
+                                                <a href="#" class="bs-wizard-dot"></a>
+                                                <div class="bs-wizard-info text-center"></div>
+                                            </div>
+                                            <div id="q14" class="col-md-1 bs-wizard-step disabled">
+                                                <!-- active -->
+                                                <div class="text-center bs-wizard-stepnum"> 14</div>
+                                                <div class="progress"><div class="progress-bar"></div></div>
+                                                <a href="#" class="bs-wizard-dot"></a>
+                                                <div class="bs-wizard-info text-center"></div>
+                                            </div>
+                                            <div id="q15" class="col-md-1 bs-wizard-step disabled">
+                                                <!-- active -->
+                                                <div class="text-center bs-wizard-stepnum"> 15</div>
+                                                <div class="progress"><div class="progress-bar"></div></div>
+                                                <a href="#" class="bs-wizard-dot"></a>
+                                                <div class="bs-wizard-info text-center"></div>
+                                            </div>
+                                            <div id="q16" class="col-md-1 bs-wizard-step disabled">
+                                                <!-- active -->
+                                                <div class="text-center bs-wizard-stepnum"> 16</div>
+                                                <div class="progress"><div class="progress-bar"></div></div>
+                                                <a href="#" class="bs-wizard-dot"></a>
+                                                <div class="bs-wizard-info text-center"></div>
+                                            </div>
+                                            <div id="q17" class="col-md-1 bs-wizard-step disabled">
+                                                <!-- active -->
+                                                <div class="text-center bs-wizard-stepnum"> 17</div>
+                                                <div class="progress"><div class="progress-bar"></div></div>
+                                                <a href="#" class="bs-wizard-dot"></a>
+                                                <div class="bs-wizard-info text-center"></div>
+                                            </div>
+                                            <div id="q18" class="col-md-1 bs-wizard-step disabled">
+                                                <!-- active -->
+                                                <div class="text-center bs-wizard-stepnum">18</div>
+                                                <div class="progress"><div class="progress-bar"></div></div>
+                                                <a href="#" class="bs-wizard-dot"></a>
+                                                <div class="bs-wizard-info text-center"></div>
+                                            </div>
+                                            <div id="q19" class="col-md-1 bs-wizard-step disabled">
+                                                <!-- active -->
+                                                <div class="text-center bs-wizard-stepnum"> 19</div>
+                                                <div class="progress"><div class="progress-bar"></div></div>
+                                                <a href="#" class="bs-wizard-dot"></a>
+                                                <div class="bs-wizard-info text-center"></div>
+                                            </div>
+                                            <div id="q20" class="col-md-1 bs-wizard-step disabled">
+                                                <!-- active -->
+                                                <div class="text-center bs-wizard-stepnum"> 20</div>
+                                                <div class="progress"><div class="progress-bar"></div></div>
+                                                <a href="#" class="bs-wizard-dot"></a>
+                                                <div class="bs-wizard-info text-center"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                <div id="QuizArea">
+                                    <input type="hidden" id="StartSubid" value="" />
+                                    <div class="quizContainer">
+                                        @if (TempData["SubId"] != null)
+                                        {
+                                            TempData.Keep("SubId");
+                                            @*<div class="QuesNo" style="background-color:#eeeeee" ></div>*@
+                                            @*@Html.TextAreaFor(m => m.QuestionName, new { @class="form-control question" , rows = "4", cols = "50"})*@
+
+                                            <textarea id="txt" class="question" readonly style="user-select: none;  resize:none;  overflow: hidden; min-height: 50px;border:none"></textarea>
+                                        }
+                                        else
+                                        {
+                                            <div class="question">Go to<button type="button" class="btn-link" onclick="location.href='@Url.Action("TakeQuiz","Home")'"> Select Topic </button>and start the Quiz again</div>
+                                        }
+                                        <ul class="choiceList"></ul>
+                                        <div class="quizMessage"></div>
+                                        <div class="result"></div>
+                                        @if (TempData["SubId"] != null)
+                                        {
+                                            TempData.Keep("SubId");   <div class="nextButton right btn btn-primary">Next Question</div>
+                                        }
+                                        else
+                                        {
+
+                                        }
+                                        <br>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </section>
+    <section></section>
+    @*@Html.Partial("~/Views/Home/GetScore.cshtml")*@
+    <script src="~/CustomScripts/TakeQuiz/StartQuiz.js"></script>
+</body>
+</html>
+<script>
+
+</script>
+
+
+

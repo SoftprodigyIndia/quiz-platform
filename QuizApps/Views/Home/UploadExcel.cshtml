@@ -1,0 +1,110 @@
+﻿@model QuizApps.Models.quiz.Upload
+@{
+    ViewBag.Title = "UploadExcel";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>UploadExcel</h2>
+
+@{
+    ViewBag.Title = "Index";
+}
+<body onload="GetTopicList();">
+<section class="content-con">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 col-md-9 col-xs-12">
+                <div class="sidebar-block">
+                    <h4>Creating a New Quiz</h4>
+                    <div class="sidebar-content create-quiz">
+                  @using (Html.BeginForm("UploadExcel", "FileUpload", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                  { 
+                        <div class="form-group col-md-6">
+                            <label class="control-label">Select Category</label>
+                            <select id="TopicList" class="form-control selectpicker" onchange="GetSubList()">
+                                <option>---Select Topic---</option>
+                            </select>
+                        </div>
+                        <!-- form group ends here -->
+                        <div class="form-group col-md-6">
+                            <label class="control-label">Select Sub Category</label>
+                            @Html.DropDownListFor(m => m.upSubId, new SelectList(string.Empty, "Value", "Text"), "---Select a SubCategory---", new { @class = "form-control selectpicker", @id = "subList" })
+                        </div>
+                        <br />
+                           
+                            <div class="form-horizontal">
+                               
+                                <div class="form-group">
+                                    <a class="col-md-offset-1 col-md-10" href="/Home/DownloadExcel/"><img src="~/images/excel.ico" width="25" height="25" title="Download Excel format" alt="excel" />Download Excel format</a>
+                                    <br />
+                                    <br />
+                                    <div class="col-md-offset-1 col-md-10">Excel:</div>
+                                        <div class="col-md-10">
+                                            <input type="file" id="FileUpload" name="Files" class="col-md-offset-1 col-md-10" />
+                                        </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-offset-1 col-md-10">
+                                        <input type="submit" value="Upload" id="btnSubmit" class="btn btn-primary" />
+
+                                    </div>
+                                </div>
+                            </div>
+                      }
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+   </section>
+</body>
+<script>
+    function GetTopicList() {
+        $.ajax
+        ({
+            url: '/Home/GettopicList',
+            type: 'get',
+            success: function (result) {
+
+                debugger
+                $("#TopicList").html("");
+                $("#TopicList").append('<option>---Select Topic---  </option>');
+                $.each(result, function (index, value) {
+                    $("#TopicList").append('<option value="' + value.Value + '">' +
+                         value.Text + '</option>');
+                })
+            },
+            error: function (data) {
+                debugger
+                alert("Something went wrong..")
+            },
+        });
+    }
+    function GetSubList() {
+        debugger
+        var TopicId = $("#TopicList").val();
+        $.ajax
+        ({
+            url: '/Home/GetsubList',
+            type: 'get',
+            data: { 'TopicId': TopicId }
+
+            ,
+            success: function (result) {
+
+                debugger
+                $("#subList").html("");
+                $("#subList").append('<option>        ---Select SubTopic---  </option>');
+                $.each(result, function (index, value) {
+                    $("#subList").append('<option value="' + value.Value + '">' +
+                         value.Text + '</option>');
+                })
+            },
+            error: function (data) {
+                debugger
+                alert("Something went wrong..")
+            },
+        });
+    }
+</script>

@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="mocktestModelStoreContainer" CdmEntityContainer="mocktestEntities1">
+    <EntitySetMapping Name="OptionDetails">
+      <EntityTypeMapping TypeName="mocktestModel.OptionDetail">
+        <MappingFragment StoreEntitySet="OptionDetails">
+          <ScalarProperty Name="OptionDetailsId" ColumnName="OptionDetailsId" />
+          <ScalarProperty Name="QuesDetailId" ColumnName="QuesDetailId" />
+          <ScalarProperty Name="OpOne" ColumnName="OpOne" />
+          <ScalarProperty Name="OpTwo" ColumnName="OpTwo" />
+          <ScalarProperty Name="OpThree" ColumnName="OpThree" />
+          <ScalarProperty Name="OpFour" ColumnName="OpFour" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QuesDetails">
+      <EntityTypeMapping TypeName="mocktestModel.QuesDetail">
+        <MappingFragment StoreEntitySet="QuesDetails">
+          <ScalarProperty Name="QuesDetailId" ColumnName="QuesDetailId" />
+          <ScalarProperty Name="SubTopicId" ColumnName="SubTopicId" />
+          <ScalarProperty Name="Question" ColumnName="Question" />
+          <ScalarProperty Name="OpCorrect" ColumnName="OpCorrect" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="mocktestModel.Role">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ScoreDetails">
+      <EntityTypeMapping TypeName="mocktestModel.ScoreDetail">
+        <MappingFragment StoreEntitySet="ScoreDetails">
+          <ScalarProperty Name="QuesDetailId" ColumnName="QuesDetailId" />
+          <ScalarProperty Name="ScoreDetailsId" ColumnName="ScoreDetailsId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Attempted" ColumnName="Attempted" />
+          <ScalarProperty Name="Corrected" ColumnName="Corrected" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="Duration" ColumnName="Duration" />
+          <ScalarProperty Name="Score" ColumnName="Score" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SubTopics">
+      <EntityTypeMapping TypeName="mocktestModel.SubTopic">
+        <MappingFragment StoreEntitySet="SubTopics">
+          <ScalarProperty Name="SubTopicId" ColumnName="SubTopicId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="TopicId" ColumnName="TopicId" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Topics">
+      <EntityTypeMapping TypeName="mocktestModel.Topic">
+        <MappingFragment StoreEntitySet="Topics">
+          <ScalarProperty Name="TopicId" ColumnName="TopicId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="mocktestModel.user">
+        <MappingFragment StoreEntitySet="users">
+          <ScalarProperty Name="Branch" ColumnName="Branch" />
+          <ScalarProperty Name="RollNo" ColumnName="RollNo" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="roleId" ColumnName="roleId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
